@@ -2,7 +2,9 @@ package com.superspytx.ab.handlers.login;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 import org.bukkit.Bukkit;
+
 import com.superspytx.ab.AB;
 import com.superspytx.ab.abs.EventAction;
 import com.superspytx.ab.abs.Handler;
@@ -49,6 +51,7 @@ public class BotHandler implements Handler {
 		return false;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void performActions(EventAction info) {
 		if (GD.b_kicking) {

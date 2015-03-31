@@ -1,0 +1,51 @@
+name: AntiBot
+main: com.superspytx.ab.AntiBot
+version: ${project.version}-SNAPSHOT-${BUILD_NUMBER}
+description: The ultimate spam protection for Minecraft.
+softdepend: [AntiCheat]
+commands:
+   antibot:
+    description: Usable Antibot Commands
+    aliases: [ab]
+    usage: |
+      /<command> help - Help menu on the AntiBot system.
+permissions:
+  antibot.join:
+    default: false
+    description: Allow users to bypass anti bot spam.
+  antibot.voice:
+    default: false
+    description: Allow users to speak, even while voiced.
+  antibot.chatspam:
+    default: false
+    description: Allows users to bypass anti chat spam.
+  antibot.countryban:
+    default: false
+    description: Users with this permission can join the server if their home country is banned from the server.
+  antibot.logindelay:
+    default: false
+    description: Should users be able to log back into the server rapidly?
+  antibot.admin.basic:
+    default: false
+    description: Basic permissions to the Antibot system.
+  antibot.admin:
+    default: false
+    description: Gives full access to the system.
+  antibot.admin.reload:
+    default: false
+    description: Ability to reload configuration.
+  antibot.admin.chatmute:
+    default: false
+    description: Ability to globally mute chat whenever you feel like it :)
+  antibot.admin.info:
+    default: false
+    description: Check the status of antibot.
+  antibot.admin.notify:
+    default: false
+    description: Gives extra details during invasions.  Tells this user if a system flush is needed.
+  antibot.admin.flush:
+    default: false
+    description: Flush all connection throttling.  This could be on accident.
+  antibot.admin.toggle:
+    default: false
+    description: Toggle AntiBot to be on or off.  Useful when getting legitimate players.

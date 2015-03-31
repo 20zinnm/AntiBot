@@ -183,9 +183,9 @@ public class SettingsCore {
 					if (AB.getInstance().getServer().getPluginManager().getPlugin("AntiCheat") != null) {
 						try {
 							if (Settings.enableAntiSpam) {
-								net.h31ix.anticheat.api.AnticheatAPI.deactivateCheck(net.h31ix.anticheat.manage.CheckType.SPAM);
+								net.gravitydevelopment.anticheat.api.AntiCheatAPI.deactivateCheck(net.gravitydevelopment.anticheat.check.CheckType.CHAT_SPAM);
 							} else {
-								net.h31ix.anticheat.api.AnticheatAPI.activateCheck(net.h31ix.anticheat.manage.CheckType.SPAM);
+								net.gravitydevelopment.anticheat.api.AntiCheatAPI.activateCheck(net.gravitydevelopment.anticheat.check.CheckType.CHAT_SPAM);
 							}
 						} catch (Throwable e) {
 							// Sounds like a different plugin.

@@ -2,8 +2,10 @@ package com.superspytx.ab.abs;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
 import com.superspytx.ab.handlers.Handlers;
 
 public class PI {
@@ -40,18 +42,21 @@ public class PI {
 		this.pl = pl;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public PI(String pl) {
 		this.b_connectfor = System.currentTimeMillis();
 		this.p_name = pl;
 		this.pl = Bukkit.getPlayerExact(pl);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public boolean updateOnlineStatus() {
 		pl = Bukkit.getPlayerExact(p_name);
 		if (pl != null) this.clean();
 		return (pl != null);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void updateStatus() {
 		if (pl == null) pl = Bukkit.getPlayerExact(p_name);
 	}
