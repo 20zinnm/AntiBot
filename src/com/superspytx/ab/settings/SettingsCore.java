@@ -20,7 +20,7 @@ public class SettingsCore {
 	
 	public void loadDefaults() {
 		/* Main Configuration */
-		config.put("AntiBot.Main.Prefix", Language.prefix);
+		// Lang file is separate for easy swapping.
 		config.put("AntiBot.Main.EnableByDefault", Settings.enabled);
 		config.put("AntiBot.Main.Notifications", Settings.notify);
 		config.put("AntiBot.DelayedStart.Enabled", Settings.delayedStart);
@@ -55,16 +55,6 @@ public class SettingsCore {
 		config.put("AntiBot.TouchTheseAnd.AWildTnTWillAppearInYourCode.AndItWillSuck.ABVersion", AB.getVersion());
 		
 		/* Language Configuration */
-		langs.put("AntiBot.Messages.Kick", Language.kickMsg);
-		langs.put("AntiBot.Messages.Captcha.Kick", Language.captchaKick);
-		langs.put("AntiBot.Messages.Captcha.OneAttemptLeft", Language.captoneLeft);
-		langs.put("AntiBot.Messages.Captcha.AttemptsLeft", Language.captattemptsLeft);
-		langs.put("AntiBot.Messages.ChatOverflow", Language.overflowedMessage);
-		langs.put("AntiBot.Messages.CountryBan", Language.countryBanMsg);
-		langs.put("AntiBot.Messages.LoginDelay", Language.loginDelayMsg);
-		langs.put("AntiBot.Messages.Admins.DSNotify", Language.adminDSNotify);
-		langs.put("AntiBot.Messages.Admins.NVNotify", Language.adminNVNotify);
-		langs.put("AntiBot.Messages.Admins.NBNotify", Language.adminNBNotify);
 		
 		AB.getInstance().getConfig().addDefaults(config);
 		FileConfiguration lang = YamlConfiguration.loadConfiguration(new File(AB.getInstance().getDataFolder(), "language.yml"));
@@ -86,16 +76,12 @@ public class SettingsCore {
 		
 		AB.getInstance().reloadConfig();
 		
-		FileConfiguration lang = YamlConfiguration.loadConfiguration(new File(AB.getInstance().getDataFolder(), "language.yml"));
-		
 		try {
 			for (Entry<String, Object> oh : config.entrySet()) {
 				String conf = oh.getKey().replace("AntiBot.", "");
 				Object duh = AB.getInstance().getConfig().get(oh.getKey());
 				
-				if (conf.equalsIgnoreCase("Main.prefix")) {
-					Language.prefix = (String) duh;
-				} else if (conf.equalsIgnoreCase("Main.EnableByDefault") && !Settings.delayingStart) {
+				if (conf.equalsIgnoreCase("Main.EnableByDefault") && !Settings.delayingStart) {
 					Settings.enabled = (Boolean) duh;
 				} else if (conf.equalsIgnoreCase("Main.Notifications")) {
 					Settings.notify = (Boolean) duh;
@@ -201,38 +187,7 @@ public class SettingsCore {
 				AB.getInstance().saveConfig();
 			}
 			
-			// load messages
-			try {
-				for (Entry<String, Object> oh : langs.entrySet()) {
-					String conf = oh.getKey().replace("AntiBot.", "");
-					String duh = lang.getString(oh.getKey());
-					
-					if (conf.equalsIgnoreCase("Messages.Kick")) {
-						Language.kickMsg = duh;
-					} else if (conf.equalsIgnoreCase("Messages.Captcha.Kick")) {
-						Language.captchaKick = duh;
-					} else if (conf.equalsIgnoreCase("Messages.Captcha.OneAttemptLeft")) {
-						Language.captoneLeft = duh;
-					} else if (conf.equalsIgnoreCase("Messages.Captcha.AttemptsLeft")) {
-						Language.captattemptsLeft = duh;
-					} else if (conf.equalsIgnoreCase("Messages.ChatOverflow")) {
-						Language.overflowedMessage = duh;
-					} else if (conf.equalsIgnoreCase("Messages.CountryBan")) {
-						Language.countryBanMsg = duh;
-					} else if (conf.equalsIgnoreCase("Messages.LoginDelay")) {
-						Language.loginDelayMsg = duh;
-					} else if (conf.equalsIgnoreCase("Messages.Admins.DSNotify")) {
-						Language.adminDSNotify = duh;
-					} else if (conf.equalsIgnoreCase("Messages.Admins.NVNotify")) {
-						Language.adminNVNotify = duh;
-					} else if (conf.equalsIgnoreCase("Messages.Admins.NBNotify")) {
-						Language.adminNBNotify = duh;
-					}
-					
-				}
-			} catch (Exception e) {
-				// fail.
-			}
+			// No need to load messages in configuration. It's done separately.
 			
 			AB.log("Configuration Loaded Successfully!");
 			reloads++;

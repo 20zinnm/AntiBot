@@ -2,9 +2,10 @@ package com.superspytx.ab.tils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
 import com.superspytx.ab.AB;
 import com.superspytx.ab.abs.PI;
-import com.superspytx.ab.settings.Language;
+import com.superspytx.ab.settings.Lang;
 
 public class Tils {
 	
@@ -76,7 +77,7 @@ public class Tils {
 	}
 	
 	public static void kickPlayer(final Player e) {
-		kickPlayer(e, Language.kickMsg);
+		kickPlayer(e, Lang.KICKMSG.toString());
 	}
 	
 }

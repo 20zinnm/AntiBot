@@ -1,0 +1,17 @@
+# Please check BukkitDev for what variables can be used where.
+# Feel free to use color codes.
+prefix: "&f[&bAntiBot&f] "
+kick-msg: "&cTripwired protection!"
+admin-delayedstart-notify: "&cAntiBot is currently under delayed start. Chat Spam is not protected yet."
+admin-newversion-notify: "&cAntiBot has a new version available! New version: %nv, your version: %yv"
+admin-newdevbuild-notify: "&cAntiBot has a new development build available! New build: %nb, your build: %yb"
+country-ban: "&cYour country is banned from this server!"
+overflowed-message: "&cSILENCE! Let's cool it down for %s seconds."
+captcha-kick: "&cCAPTCHA Failed!"
+captcha-one-left: "&cOne attempt left!"
+captcha-attempts-left: "You have %a attempts left!"
+login-delay: "You logged in too quickly! Please wait %s second(s)."
+captcha-wrong: "&cIncorrect captcha! You have %w failed attempts."
+captcha-correct: "&aCorrect! Thanks for not being a bot. You can now speak again."
+chat-unmuted: "&aChat has been unmuted."
+no-permissions: "&cYou don''t have permission for that!"

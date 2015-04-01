@@ -2,12 +2,13 @@ package com.superspytx.ab.handlers.chat;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+
 import com.superspytx.ab.AB;
 import com.superspytx.ab.AntiBot;
 import com.superspytx.ab.abs.EventAction;
 import com.superspytx.ab.abs.Handler;
 import com.superspytx.ab.abs.PI;
-import com.superspytx.ab.settings.Language;
+import com.superspytx.ab.settings.Lang;
 import com.superspytx.ab.settings.Settings;
 import com.superspytx.ab.tils.CaptchaTils;
 import com.superspytx.ab.tils.Tils;
@@ -72,7 +73,7 @@ public class ChatFlowHandler implements Handler {
 			
 			@Override
 			public void run() {
-				Bukkit.broadcastMessage(Language.prefix + ChatColor.RED + Language.overflowedMessage.replace("%sec%", Long.toString(GD.cf_ttmf)));
+				Bukkit.broadcastMessage(Lang.PREFIX.toString() + ChatColor.RED + Lang.OVERFLOWED.toString().replace("%s", Long.toString(GD.cf_ttmf)));
 			}
 			
 		}, 20L);
@@ -86,7 +87,7 @@ public class ChatFlowHandler implements Handler {
 				GD.cf_lp = "";
 				GD.cf_lmt = 0L;
 				GD.cf_ttmf += 5L;
-				Bukkit.broadcastMessage(Language.prefix + ChatColor.GREEN + "Chat has been unmuted!");
+				Bukkit.broadcastMessage(Lang.PREFIX.toString() + Lang.CHATUNMUTED.toString());
 			}
 			
 		}, 20L * GD.cf_ttmf);

@@ -1,11 +1,15 @@
 package com.superspytx.ab;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,7 +18,7 @@ import com.superspytx.ab.Metrics.Graph;
 import com.superspytx.ab.abs.CommandEvent;
 import com.superspytx.ab.callunits.CallUnit;
 import com.superspytx.ab.handlers.Handlers;
-import com.superspytx.ab.settings.Language;
+import com.superspytx.ab.settings.Lang;
 import com.superspytx.ab.settings.Permissions;
 import com.superspytx.ab.settings.Settings;
 import com.superspytx.ab.settings.SettingsCore;
@@ -30,13 +34,16 @@ public class AntiBot extends JavaPlugin {
 	private static boolean development;
 	private Updates updates;
 	
+	public static YamlConfiguration LANG;
+	public static File LANG_FILE;
+	
 	public void onDisable() {
 		Bukkit.getScheduler().cancelTasks(this);
 	}
 	
 	public void onEnable() {
 		instance = this;
-		
+		loadLang();
 		/* Make plugin directory if it doesn't exist.*
 		 * This should fix the GeoIP problem */
 		if (!getDataFolder().exists()) getDataFolder().mkdir();
@@ -128,7 +135,7 @@ public class AntiBot extends JavaPlugin {
 				public void run() {
 					AB.log("System has been enabled!");
 					for (Player pl : Bukkit.getOnlinePlayers()) {
-						if (Permissions.ADMIN_NOTIFY.getPermission(pl)) pl.sendMessage(Language.prefix + ChatColor.GREEN + "System has been enabled!");
+						if (Permissions.ADMIN_NOTIFY.getPermission(pl)) pl.sendMessage(Lang.PREFIX.toString() + ChatColor.GREEN + "System has been enabled!");
 					}
 					Settings.enabled = true;
 					Settings.delayedStart = false;
@@ -211,6 +218,9 @@ public class AntiBot extends JavaPlugin {
 		for (Player pl : AB.getInstance().getServer().getOnlinePlayers()) {
 			GD.getPI(pl).ab_alreadyin = true;
 		}
+		
+		// maybe reload lang?
+		
 	}
 	
 	public static void debug(String e) {
@@ -231,6 +241,66 @@ public class AntiBot extends JavaPlugin {
 		if (cmd.getName().startsWith("ab") || cmd.getName().startsWith("antibot")) return Agent.dispatchUnit(new CommandEvent(sender, cmd, label, args), Handlers.COMMAND, true);
 		
 		return false;
+	}
+	
+	/**
+	 * Load the lang.yml file.
+	 * @return The lang.yml config.
+	 */
+	public void loadLang() {
+	    File lang = new File(getDataFolder(), "language.yml");
+	    if (!lang.exists()) {
+	        try {
+	            getDataFolder().mkdir();
+	            lang.createNewFile();
+	            InputStream defConfigStream = this.getResource("language.yml");
+	            if (defConfigStream != null) {
+	                @SuppressWarnings("deprecation")
+					YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+	                defConfig.save(lang);
+	                Lang.setFile(defConfig);
+	                return;
+	            }
+	        } catch(IOException e) {
+	            e.printStackTrace(); // So they notice
+	            getLogger().severe("[PluginName] Couldn't create language file.");
+	            getLogger().severe("[PluginName] This is a fatal error. Now disabling");
+	            Bukkit.getPluginManager().disablePlugin(this);
+	        }
+	    }
+	    YamlConfiguration conf = YamlConfiguration.loadConfiguration(lang);
+	    for(Lang item:Lang.values()) {
+	        if (conf.getString(item.getPath()) == null) {
+	            conf.set(item.getPath(), item.getDefault());
+	        }
+	    }
+	    Lang.setFile(conf);
+	    AntiBot.LANG = conf;
+	    AntiBot.LANG_FILE = lang;
+	    try {
+	        conf.save(getLangFile());
+	    } catch(IOException e) {
+	        getLogger().log(Level.WARNING, "PluginName: Failed to save lang.yml.");
+	        getLogger().log(Level.WARNING, "PluginName: Report this stack trace to <your name>.");
+	        e.printStackTrace();
+	        Bukkit.getPluginManager().disablePlugin(this);
+	    }
+	}
+	
+	/**
+	* Gets the lang.yml config.
+	* @return The lang.yml config.
+	*/
+	public YamlConfiguration getLang() {
+	    return LANG;
+	}
+	 
+	/**
+	* Get the lang.yml file.
+	* @return The lang.yml file.
+	*/
+	public File getLangFile() {
+	    return LANG_FILE;
 	}
 	
 }

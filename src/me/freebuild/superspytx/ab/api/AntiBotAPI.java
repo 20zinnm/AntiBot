@@ -2,11 +2,12 @@ package me.freebuild.superspytx.ab.api;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
 import com.superspytx.ab.AB;
 import com.superspytx.ab.abs.PI;
 import com.superspytx.ab.api.AntiBotAPIException;
 import com.superspytx.ab.handlers.Handlers;
-import com.superspytx.ab.settings.Language;
+import com.superspytx.ab.settings.Lang;
 import com.superspytx.ab.tils.CaptchaTils;
 import com.superspytx.ab.workflow.GD;
 
@@ -167,7 +168,7 @@ public class AntiBotAPI {
         pli.cp_haspuzzle = false;
         Bukkit.broadcastMessage("<" + pli.pl.getDisplayName() + "> " + pli.cs_lsm);
         pli.resetSpamData();
-        pli.pl.sendMessage(Language.prefix + '\247' + "a" + "Correct! Thanks for not being a bot. You can now speak again.");
+        pli.pl.sendMessage(Lang.PREFIX.toString() + Lang.CAPRIGHT.toString());
     }
     
     /**

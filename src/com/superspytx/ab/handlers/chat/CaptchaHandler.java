@@ -3,7 +3,7 @@ package com.superspytx.ab.handlers.chat;
 import com.superspytx.ab.abs.EventAction;
 import com.superspytx.ab.abs.Handler;
 import com.superspytx.ab.abs.PI;
-import com.superspytx.ab.settings.Language;
+import com.superspytx.ab.settings.Lang;
 import com.superspytx.ab.settings.Settings;
 import com.superspytx.ab.tils.Tils;
 import com.superspytx.ab.workflow.GD;
@@ -20,14 +20,14 @@ public class CaptchaHandler implements Handler {
 			else {
 				pli.cp_idle = System.currentTimeMillis();
 				if (!pli.cp_puzzle.checkAnswer(info.message)) {
-					String wrong = pli.cp_puzzle.getAttempts() == 1 ? Language.captoneLeft : pli.cp_puzzle.getAttempts() + " " + Language.captattemptsLeft;
-					info.player.sendMessage(Language.prefix + '\247' + "c" + "Incorrect CAPTCHA! You have " + wrong);
+					String wrong = pli.cp_puzzle.getAttempts() == 1 ? Lang.CAPONELEFT.toString() : Lang.CAPATTEMPTSLEFT.toString().replace("%a", String.valueOf(pli.cp_puzzle.getAttempts()));
+					info.player.sendMessage(Lang.PREFIX.toString() + Lang.CAPWRONG.toString().replace("%w", wrong.toString()));
 				} else {
 					pli.cp_haspuzzle = false;
 					pli.cp_solvedpuzzle = true;
 					pli.resetSpamData();
 					info.player.chat(pli.cs_lsm);
-					info.player.sendMessage(Language.prefix + '\247' + "a" + "Correct! Thanks for not being a bot. You can now speak again.");
+					info.player.sendMessage(Lang.PREFIX.toString() + Lang.CAPRIGHT.toString());
 				}
 			}
 		}
@@ -36,7 +36,7 @@ public class CaptchaHandler implements Handler {
 	
 	@Override
 	public void performActions(EventAction info) {
-		Tils.kickPlayer(info.player, Language.captchaKick);
+		Tils.kickPlayer(info.player, Lang.CAPTCHAKICK.toString());
 	}
 	
 }

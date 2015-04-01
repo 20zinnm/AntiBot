@@ -1,11 +1,13 @@
 package com.superspytx.ab.tils;
 
 import java.util.Random;
+
 import org.bukkit.entity.Player;
+
 import com.superspytx.ab.AB;
 import com.superspytx.ab.abs.PI;
 import com.superspytx.ab.abs.Puzzle;
-import com.superspytx.ab.settings.Language;
+import com.superspytx.ab.settings.Lang;
 import com.superspytx.ab.settings.Permissions;
 import com.superspytx.ab.settings.Settings;
 import com.superspytx.ab.workflow.GD;
@@ -123,7 +125,7 @@ public class CaptchaTils {
 		GD.cp_caps++;
 		
 		if (p.cp_puzzle.isVersion2()) {
-			pl.sendMessage(Language.prefix + '\247' + "c" + "Please enter the numbers printed below into chat:");
+			pl.sendMessage(Lang.PREFIX.toString() + '\247' + "c" + "Please enter the numbers printed below into chat:");
 			for (int i = 0; i < 5; i++)
 				pl.sendMessage(p.cp_puzzle.getPuzzle()[i]);
 		}
@@ -145,7 +147,7 @@ public class CaptchaTils {
 		GD.cp_caps++;
 		
 		if (p.cp_puzzle.isVersion2()) {
-			pl.sendMessage(Language.prefix + '\247' + "c" + "Please enter the numbers printed below into chat:");
+			pl.sendMessage(Lang.PREFIX.toString() + '\247' + "c" + "Please enter the numbers printed below into chat:");
 			for (int i = 0; i < 5; i++)
 				pl.sendMessage(p.cp_puzzle.getPuzzle()[i]);
 		}

@@ -4,3 +4,9 @@
 /.classpath
 /.project
 /target/
+
+*.jar
+
+*.jar
+
+dl/GeoIP.dat.gz

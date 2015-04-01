@@ -47,7 +47,7 @@ public enum Permissions
     {
         if (!this.getPermission(pl))
         {
-            sender.sendMessage(Language.prefix + "\247cSorry, you don't have privileges.");
+            sender.sendMessage(Lang.PREFIX.toString() + Lang.NO_PERMS.toString());
             return false;
         }
         else

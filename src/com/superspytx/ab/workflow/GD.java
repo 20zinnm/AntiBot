@@ -5,12 +5,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
 import com.superspytx.ab.abs.PI;
 import com.superspytx.ab.handlers.Handlers;
-import com.superspytx.ab.settings.Language;
+import com.superspytx.ab.settings.Lang;
 import com.superspytx.ab.settings.Settings;
 import com.superspytx.ab.tils.Tils;
 
@@ -127,7 +128,7 @@ public class GD {
 		b_kicking = false;
 		b_lc = 0L;
 		b_cp.clear();
-		if (cf_gm) Bukkit.broadcastMessage(Language.prefix + ChatColor.GREEN + "Chat has been unmuted!");
+		if (cf_gm) Bukkit.broadcastMessage(Lang.PREFIX.toString() + Lang.CHATUNMUTED.toString());
 		cf_gm = false;
 		cf_cts = 0;
 		cf_ttmf = 5L;
